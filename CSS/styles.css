@@ -1,38 +1,64 @@
-span{
+span {
   color: cyan
 }
+
 .container-fluid {
   background-color: navy;
-  height: 90vh;
+  height: 100vh;
 }
-.menu{
+
+.menu {
   height: 15vh;
-  background: linear-gradient( cyan, navy);
-  color:whitesmoke
+  background: linear-gradient(cyan, navy);
+  color: whitesmoke
 }
+
 /* Hasta aqui el Menu/Head */
-.tablero{
+.tablero {
   background-color: cyan;
-  height: 65vh;
+  height: 70vh;
 }
-.players{
-  background: linear-gradient(90deg, navy, cyan);
+
+.players {
+  border: 1px solid;
+  background-color: navy;
+  color: cyan;
+  margin: 10vh 0 10vh 0;
+  height: 15vh;
+  width: auto;
 }
-.battleField{
+
+.p1 {}
+
+.p2 {}
+
+.battleField {
   background-color: cyan;
 }
-.board{
+
+.board {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
 }
 
-.box{
+.box {
   border: 1px solid;
   margin: 5%;
   height: 15vh;
-  width: 15vw;
+  /* width: 15vw; */
 }
-.turnsPts{
-  background: linear-gradient(90deg, cyan, navy);
+
+.turno {
+  border: 1px solid;
+  background-color: navy;
+  color: cyan;
+  margin: 10vh 0 10vh 0;
+  height: 15vh;
+  width: auto;
+}
+
+.info {
+  color: cyan;
+  height: 15vh;
 }

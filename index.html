@@ -16,9 +16,14 @@
 
 <body>
   <div class="container-fluid">
-    <div class="row align-items-center text-center menu"><h1>TIC-<span>TAC</span>-TOE</h1></div>
+    <div class="row align-items-center text-center menu">
+      <h1>TIC-<span>TAC</span>-TOE</h1>
+    </div>
     <div class="row align-items-center text-center tablero">
-      <div class="col-2 players">Jugadores</div>
+      <div class="col-2">
+        <div class="players p1">NAME 1</div>
+        <div class="turno p1">TURN 1</div>
+      </div>
       <div class="col-8 battleField">
         <div class="board">
           <div class="box pos-1">1</div>
@@ -31,12 +36,17 @@
           <div class="box pos-8">8</div>
           <div class="box pos-9">9</div>
         </div>
-        <div>
-        
-      </div></div>
-      <div class="col-2 turnsPts">Turnos</div>
+      </div>
+      <div class="col-2">
+        <div class="players p2">NAME 2</div>
+        <div class="turno p2">TURN 2</div>
+      </div>
     </div>
-    <div class="row align-items-center text-center">3</div>
+    <div class="row align-items-center text-center info">
+      <div class="col-2 ">PTS P1 / Symbol</div>
+      <div class="col-8 "><button class="btn btn-primary" type="button">RESTART</button></div>
+      <div class="col-2 ">PTS P2 / Symbol</div>
+    </div>
   </div>
   <script src="./JS/main.js"></script>
 </body>
