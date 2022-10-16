@@ -1,5 +1,5 @@
 body {
-  background-image: url(../IMG/battlefieldWallpaper.jpg);
+  background-image: url(../IMG/gameWallpaper.jpg);
   height: 100vh;
   background-size: cover;
 }
@@ -27,8 +27,8 @@ body {
 } */
 
 #currentPlayer {
-  border-top-left-radius: 15%;
-  border-top-right-radius: 15%;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
   border: 0.2em groove rgb(255, 251, 0);
   background: radial-gradient(transparent, yellow);
 }
@@ -43,6 +43,7 @@ body {
 
 #battlefield {
   display: grid;
+  margin: auto;
   justify-content: center;
   align-content: center;
   justify-items: center;
@@ -51,7 +52,7 @@ body {
 }
 
 .cell {
-  color: yellow;
+  color: black;
   font-size: 4em;
   width: 20vw;
   height: 20vh;
@@ -63,6 +64,13 @@ body {
   align-items: center;
   position: relative;
   cursor: pointer;
+  text-shadow: 0 0 0.2em yellow, 0 0 0.2em yellow,
+  0 0 0.2em yellow;
+}
+
+.cell:hover {
+  transition: background-color .5s;
+  background-color: rgba(251, 255, 0, 0.336);
 }
 
 .cell:first-child,
@@ -92,18 +100,21 @@ body {
   background: linear-gradient(transparent, white);
   height: 15vh;
 }
-#restartBtn{
+
+#restartBtn {
   height: 5vh;
   border-radius: 50%;
   background: radial-gradient(transparent, yellow);
 }
+
 #restartBtn:hover {
   transform: scale(2);
   transition: 2s;
 }
+
 #statusText {
   color: black;
-  font-size: 2em;
+  font-size: 1.5em;
   text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
-    0 0 0.2em rgb(0, 0, 0);
+  0 0 0.2em rgb(0, 0, 0);
 }

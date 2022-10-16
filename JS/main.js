@@ -23,6 +23,7 @@ let currentPlayer = "O";
 let running = false;
 // aqui utilizare un contador de turnos de 6, que restara por cada vez que posicionemos ficha
 let flag = 6;
+let cleanCell = ""
 
 initializeGame();
 
@@ -55,29 +56,60 @@ function cellClicked() {
     // seguido de la funcion checkWinner
 }
 function updateCell(cell, index) {
+    // aqui, siempre y cuando los turnos sean mayores que 1, asignare el indice y el simbolo 
+    // a la casilla clicada
     if (flag >= 1) {
-    voidArray[index] = currentPlayer;
-    cell.textContent = currentPlayer;
-    flag--
-}
-}
-function changePlayer() {
+        voidArray[index] = currentPlayer;
+        cell.textContent = currentPlayer;
+        --flag;
+        return;
+    }; // restando 1 turno por casilla modificada
+    if (flag == 0) {
+        cell.textContent = currentPlayer = "";
 
+    }
+    // else {
+    //     voidArray[index] = "";
+    //     cell.textContent = cleanCell
+    //     ++flag
+    //     return;
+    // }
+}
+
+function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
     statusText.textContent = `Es el turno de ${currentPlayer}`;
+
 }
 function checkWinner() {
+    //al hacer la comprobacion, victoria sera false hasta que el bucle for siguiente encuentre una condicion de 
+    //victoria valida
     let victory = false;
-
+    // con un el bucle for recorreremos la array multidimensional usando la propiedad .length
     for (let i = 0; i < victoryConditions.length; i++) {
+        // crearemos una variable temporal a la que le añadiremos a las condiciones de victoria
+        // un array con nuestro indice
         const condition = victoryConditions[i];
         const cellA = voidArray[condition[0]];
         const cellB = voidArray[condition[1]];
         const cellC = voidArray[condition[2]];
-
+        /*
+        aqui iteramos sobre el interior del array de "victoryConditions"
+        creamos una condicion de indice que ira recorriendo una a una las posiciones del "voidArray"
+        hasta encontrar semejanza.
+        si indice 0,1,2 no son espacios y son todas iguales, significara que alguien gana
+        en caso contrario, seguira recorriendo el orden del array de "victoryConditions"
+            [0, 1, 2], primera vez
+            [3, 4, 5], segunda vez
+            [6, 7, 8], ...
+            [0, 3, 6], ...
+        y asi con sus posiciones de indice en el array
+        */
+       // si cellA esta vacia o cellB esta vacia o cellC esta vacia, continuara...
         if (cellA == "" || cellB == "" || cellC == "") {
             continue;
         }
+        // en su defecto si A es igual a B y B es igual a C, habra un ganador y victoria sera true!
         if (cellA == cellB && cellB == cellC) {
             victory = true;
             break;
@@ -88,6 +120,7 @@ function checkWinner() {
         statusText.textContent = `${currentPlayer} gana!!`;
         running = false;
     }
+    //comento la funcion de empate, ya que solo se pueden utilizar 3 fichas por jugador
     // else if (!voidArray.includes("")) {
     //     statusText.textContent = `Empate!`;
     //     running = false;
@@ -96,6 +129,7 @@ function checkWinner() {
         changePlayer();
     }
 }
+//  cree un boton de reinicio que limpia las celdas, restaura los turnos y el nombre del jugador acutal
 function restartGame() {
     currentPlayer = "X";
     voidArray = ["", "", "", "", "", "", "", "", ""];
