@@ -12,69 +12,67 @@ const winConditions = [
     [2, 4, 6]
 ];
 let voidArray = ["", "", "", "", "", "", "", "", ""];
-let currentPlayer = "X";
+let currentPlayer = "O";
 let running = false;
-
-
+let flag = 6;
 
 initializeGame();
 
-function initializeGame(){
+function initializeGame() {
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
     statusText.textContent = `Es el turno de ${currentPlayer}`;
     running = true;
 }
-function cellClicked(){
+function cellClicked() {
     const cellIndex = this.getAttribute("cellIndex");
-
-    if(voidArray[cellIndex] != "" || !running){
+    if (voidArray[cellIndex] != "" || !running) {
         return;
     }
 
     updateCell(this, cellIndex);
     checkWinner();
 }
-function updateCell(cell, index){
-  voidArray[index] = currentPlayer;
+function updateCell(cell, index) {
+    voidArray[index] = currentPlayer;
     cell.textContent = currentPlayer;
 }
-function changePlayer(){
-    
+function changePlayer() {
+
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
     statusText.textContent = `Es el turno de ${currentPlayer}`;
 }
-function checkWinner(){
+function checkWinner() {
     let roundWon = false;
 
-    for(let i = 0; i < winConditions.length; i++){
+    for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
         const cellA = voidArray[condition[0]];
         const cellB = voidArray[condition[1]];
         const cellC = voidArray[condition[2]];
 
-        if(cellA == "" || cellB == "" || cellC == ""){
+        if (cellA == "" || cellB == "" || cellC == "") {
             continue;
         }
-        if(cellA == cellB && cellB == cellC){
+        if (cellA == cellB && cellB == cellC) {
             roundWon = true;
             break;
         }
     }
 
-    if(roundWon){
+    if (roundWon) {
         statusText.textContent = `${currentPlayer} gana!!`;
         running = false;
     }
-    else if(!voidArray.includes("")){
+    else if (!voidArray.includes("")) {
         statusText.textContent = `Empate!`;
         running = false;
     }
-    else{
+    else {
         changePlayer();
     }
 }
-function restartGame(){
+function restartGame() {
     currentPlayer = "X";
     voidArray = ["", "", "", "", "", "", "", "", ""];
     statusText.textContent = `Es el turno de ${currentPlayer}`;

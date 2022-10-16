@@ -22,7 +22,7 @@
           <div class="dataBox1">
             <div>
               <p>CUAL ES TU NOMBRE?</p>
-              <input type="text" id="player1Name">
+              <input id="player1Name"class="form-control me-2" type="search" placeholder="Introducelo aqui...">
               <input type="radio" name="typeRadio1" value="hum" />Human
               <input type="radio" name="typeRadio1" value="cpu" />CPU
             </div>
@@ -34,7 +34,7 @@
           <div class="dataBox2">
             <div>
               <p>ETIQUETA A TU NEMESIS</p>
-              <input type="text" id="player2Name">
+              <input id="player2Name" class="form-control me-2" type="search" placeholder="Introducelo aqui..." aria-label="Search">
               <input type="radio" name="typeRadio2" value="hum" />Human
               <input type="radio" name="typeRadio2" value="cpu" />CPU
             </div>
@@ -58,13 +58,13 @@
     <div class="row fixed-bottom">
       <div class="col" id="buttons">
         <div id="zoom">
-          <a href="./Pages/game.html" id="play">AL TURRON!</a>
+          <a onclick="saveName()"href="./Pages/game.html" id="play">AL TURRON!</a>
         </div>
       </div>
     </div>
   </div>
+
   <script src="./JS/saveName.js"></script>
-  <script src="./JS/game.js"></script>
 </body>
 
 </html>
