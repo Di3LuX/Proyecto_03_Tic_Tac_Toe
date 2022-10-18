@@ -43,7 +43,7 @@ body {
 
 #battlefield {
   display: grid;
-  margin: auto;
+  margin-top: 5vh;
   justify-content: center;
   align-content: center;
   justify-items: center;
@@ -102,7 +102,8 @@ body {
 }
 
 #restartBtn {
-  height: 5vh;
+  margin-top: 2vh;
+  height: 10vh;
   border-radius: 50%;
   background: radial-gradient(transparent, yellow);
 }

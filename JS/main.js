@@ -1,8 +1,8 @@
 let player1Name = sessionStorage.getItem("playerXName")
 let player2Name = sessionStorage.getItem("playerOName")
 
-let player1Hum = sessionStorage.getItem("player1Hum")
-let player2Hum = sessionStorage.getItem("player2Hum")
+let ifHuman1 = sessionStorage.getItem("player1Hum")
+let ifHuman2 = sessionStorage.getItem("player2Hum")
 
 const randomizer = (numero, letras = "Arcangel ") => letras + numero;
 
@@ -13,13 +13,13 @@ let result = randomizer(random);
 let CPUName = result;
 
 class Player {
-  //PROPIEDADES
+    //PROPIEDADES
     constructor(name, mark) {
-      // dentro del constructor instanciaremos las clases
-      this.name = name;
-      this.mark = mark;
-      this.flag = 3;
-      // cualquier propiedad dentro de la clase, viene referenciada con el this.
+        // dentro del constructor instanciaremos las clases
+        this.name = name;
+        this.mark = mark;
+        this.flag = 3;
+        // cualquier propiedad dentro de la clase, viene referenciada con el this.
     };
 };
 //Instanciamos a 3 jugadores con 2 variables que seran nombre y marca, y 3 turnos fijos.
@@ -51,7 +51,7 @@ let currentPlayer = "X";
 // el juego comenzara con la variable "running" en falso hasta que inizialicemos el juego
 let running = false;
 // aqui utilizare un contador de turnos de 6, que restara por cada vez que posicionemos ficha
-
+let flag = 6;
 initializeGame();
 
 function initializeGame() {
@@ -67,6 +67,7 @@ function initializeGame() {
     running = true;
 };
 function cellClicked() {
+    console.log(flag)
     /*
     aqui creo una constante para asignarle un atributo a cada casilla cuando esta sea clickada
     ese atributo sera el mismo "cellIndex" es decir, por cada click se asignara un indice en 
@@ -85,8 +86,24 @@ function cellClicked() {
 function updateCell(cell, index) {
     // aqui, siempre y cuando los turnos sean mayores que 1, asignare el indice y el simbolo 
     // a la casilla clicada
-    voidArray[index] = currentPlayer;
-    cell.textContent = currentPlayer;
+    if (flag >= 1) {
+        console.log("dada");
+
+        if (voidArray[index] == "") {
+            voidArray[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+            flag--;
+            changePlayer();
+        }
+    } else {
+        if (voidArray[index] == currentPlayer && cell.textContent == currentPlayer) {
+            console.log("dada");
+            voidArray[index] = "";
+            cell.textContent = "";
+            flag++;
+            console.log(flag);
+        };
+    };
 };
 
 function changePlayer() {
@@ -138,7 +155,7 @@ function checkWinner() {
         running = false;
     }
     else {
-        changePlayer();
+        // changePlayer();
     }
 }
 //  cree un boton de reinicio que limpia las celdas, restaura los turnos y el nombre del jugador acutal
