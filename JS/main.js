@@ -1,3 +1,33 @@
+let player1Name = sessionStorage.getItem("playerXName")
+let player2Name = sessionStorage.getItem("playerOName")
+
+let player1Hum = sessionStorage.getItem("player1Hum")
+let player2Hum = sessionStorage.getItem("player2Hum")
+
+const randomizer = (numero, letras = "Arcangel ") => letras + numero;
+
+let random = Math.floor(Math.random() * 999);
+
+let result = randomizer(random);
+
+let CPUName = result;
+
+class Player {
+  //PROPIEDADES
+    constructor(name, mark) {
+      // dentro del constructor instanciaremos las clases
+      this.name = name;
+      this.mark = mark;
+      this.flag = 3;
+      // cualquier propiedad dentro de la clase, viene referenciada con el this.
+    };
+};
+//Instanciamos a 3 jugadores con 2 variables que seran nombre y marca, y 3 turnos fijos.
+let player1 = new Player(player1Name, "X");
+let player2 = new Player(player2Name, "O");
+let player3CPU = new Player(CPUName, "O");
+
+
 // trabajaremos con constantes que ya nos obtendran el valor de los divs en html con el id especificado
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
@@ -14,16 +44,13 @@ const victoryConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-
 // aqui una array con 9 posiciones vacias, util para llamarla y movernos libremente por las casillas
 let voidArray = ["", "", "", "", "", "", "", "", ""];
 // player comenzara siendo "O" y cambiara cada turno (en caso de humano vs humano)
-let currentPlayer = "O";
+let currentPlayer = "X";
 // el juego comenzara con la variable "running" en falso hasta que inizialicemos el juego
 let running = false;
 // aqui utilizare un contador de turnos de 6, que restara por cada vez que posicionemos ficha
-let flag = 6;
-let cleanCell = ""
 
 initializeGame();
 
@@ -38,7 +65,7 @@ function initializeGame() {
     statusText.textContent = `Es el turno de ${currentPlayer}`;
     // aqui hacemos que cuando el juego inizialice cambie a verdadero
     running = true;
-}
+};
 function cellClicked() {
     /*
     aqui creo una constante para asignarle un atributo a cada casilla cuando esta sea clickada
@@ -54,33 +81,18 @@ function cellClicked() {
     checkWinner();
     // "si no" llama a la funcion "updateCell" con el argumento this asi como cellIndex
     // seguido de la funcion checkWinner
-}
+};
 function updateCell(cell, index) {
     // aqui, siempre y cuando los turnos sean mayores que 1, asignare el indice y el simbolo 
     // a la casilla clicada
-    if (flag >= 1) {
-        voidArray[index] = currentPlayer;
-        cell.textContent = currentPlayer;
-        --flag;
-        return;
-    }; // restando 1 turno por casilla modificada
-    if (flag == 0) {
-        cell.textContent = currentPlayer = "";
-
-    }
-    // else {
-    //     voidArray[index] = "";
-    //     cell.textContent = cleanCell
-    //     ++flag
-    //     return;
-    // }
-}
+    voidArray[index] = currentPlayer;
+    cell.textContent = currentPlayer;
+};
 
 function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
     statusText.textContent = `Es el turno de ${currentPlayer}`;
-
-}
+};
 function checkWinner() {
     //al hacer la comprobacion, victoria sera false hasta que el bucle for siguiente encuentre una condicion de 
     //victoria valida
@@ -105,7 +117,7 @@ function checkWinner() {
             [0, 3, 6], ...
         y asi con sus posiciones de indice en el array
         */
-       // si cellA esta vacia o cellB esta vacia o cellC esta vacia, continuara...
+        // si cellA esta vacia o cellB esta vacia o cellC esta vacia, continuara...
         if (cellA == "" || cellB == "" || cellC == "") {
             continue;
         }
@@ -120,11 +132,11 @@ function checkWinner() {
         statusText.textContent = `${currentPlayer} gana!!`;
         running = false;
     }
-    //comento la funcion de empate, ya que solo se pueden utilizar 3 fichas por jugador
-    // else if (!voidArray.includes("")) {
-    //     statusText.textContent = `Empate!`;
-    //     running = false;
-    // }
+    // comento la funcion de empate, ya que solo se pueden utilizar 3 fichas por jugador
+    else if (!voidArray.includes("")) {
+        statusText.textContent = `Empate!`;
+        running = false;
+    }
     else {
         changePlayer();
     }
@@ -137,4 +149,4 @@ function restartGame() {
     cells.forEach(cell => cell.textContent = "");
     flag = 6
     running = true;
-};
+}
