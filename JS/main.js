@@ -1,5 +1,5 @@
-let player1Name = sessionStorage.getItem("playerXName")
-let player2Name = sessionStorage.getItem("playerOName")
+let player1Name = sessionStorage.getItem("player1Name")
+let player2Name = sessionStorage.getItem("player2Name")
 
 let ifHuman1 = sessionStorage.getItem("player1Hum")
 let ifHuman2 = sessionStorage.getItem("player2Hum")
@@ -18,7 +18,7 @@ class Player {
         // dentro del constructor instanciaremos las clases
         this.name = name;
         this.mark = mark;
-        this.flag = 3;
+        this.turn = 3;
         // cualquier propiedad dentro de la clase, viene referenciada con el this.
     };
 };
@@ -30,7 +30,7 @@ let player3CPU = new Player(CPUName, "O");
 
 // trabajaremos con constantes que ya nos obtendran el valor de los divs en html con el id especificado
 const cells = document.querySelectorAll(".cell");
-const statusText = document.querySelector("#statusText");
+const statusText = document.querySelector("#statusText"); // getElelemtbyid es mas optimo by miguelonchis
 const restartBtn = document.querySelector("#restartBtn");
 
 // aqui una array con las variaciones de filas/columnas que necesitaremos para conseguir la victoria
@@ -45,13 +45,14 @@ const victoryConditions = [
     [2, 4, 6]
 ];
 // aqui una array con 9 posiciones vacias, util para llamarla y movernos libremente por las casillas
-let voidArray = ["", "", "", "", "", "", "", "", ""];
+let board = ["", "", "", "", "", "", "", "", ""];
 // player comenzara siendo "O" y cambiara cada turno (en caso de humano vs humano)
 let currentPlayer = "X";
+let currentPlayerName = player1Name;
 // el juego comenzara con la variable "running" en falso hasta que inizialicemos el juego
 let running = false;
 // aqui utilizare un contador de turnos de 6, que restara por cada vez que posicionemos ficha
-let flag = 6;
+let turn = 6;
 initializeGame();
 
 function initializeGame() {
@@ -62,20 +63,20 @@ function initializeGame() {
     restartBtn.addEventListener("click", restartGame);
     // con .textContent modificaremos el texto del div con id "statusText" para que nos indique
     // de quien es el turno
-    statusText.textContent = `Es el turno de ${currentPlayer}`;
+    statusText.textContent = `Es el turno de "X" ${currentPlayerName}`;
     // aqui hacemos que cuando el juego inizialice cambie a verdadero
     running = true;
 };
 function cellClicked() {
-    console.log(flag)
     /*
     aqui creo una constante para asignarle un atributo a cada casilla cuando esta sea clickada
     ese atributo sera el mismo "cellIndex" es decir, por cada click se asignara un indice en 
     voidArray, dando a esa casilla vacia, una posicion en dicha array.
     */
     const cellIndex = this.getAttribute("cellIndex");
-    if (voidArray[cellIndex] != "" || !running) {
-        return;
+    if ((turn > 0) && (board[cellIndex] != "" || !running)) {
+        board[index] = currentPlayer;
+        cell.textContent = currentPlayer;
     };
     // "si" el array de casillas no es igual a vacio o el juego no esta en marcha, no hagas nada y vuelve 
     updateCell(this, cellIndex);
@@ -86,29 +87,25 @@ function cellClicked() {
 function updateCell(cell, index) {
     // aqui, siempre y cuando los turnos sean mayores que 1, asignare el indice y el simbolo 
     // a la casilla clicada
-    if (flag >= 1) {
-        console.log("dada");
-
-        if (voidArray[index] == "") {
-            voidArray[index] = currentPlayer;
-            cell.textContent = currentPlayer;
-            flag--;
-            changePlayer();
-        }
+    if (turn > 0) {
+        board[index] = currentPlayer;
+        cell.textContent = currentPlayer;
+        turn--;
+        changePlayer();
     } else {
-        if (voidArray[index] == currentPlayer && cell.textContent == currentPlayer) {
-            console.log("dada");
-            voidArray[index] = "";
+        if (board[index] == currentPlayer) {
+            board[index] = "";
             cell.textContent = "";
-            flag++;
-            console.log(flag);
+            turn++;
+        } else {
         };
     };
 };
 
 function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
-    statusText.textContent = `Es el turno de ${currentPlayer}`;
+    currentPlayerName = (currentPlayerName == `"X" ${player1Name}`) ? `"O" ${player2Name}` : `"X" ${player1Name}`;
+    statusText.textContent = `Es el turno de ${currentPlayerName}`;
 };
 function checkWinner() {
     //al hacer la comprobacion, victoria sera false hasta que el bucle for siguiente encuentre una condicion de 
@@ -119,9 +116,9 @@ function checkWinner() {
         // crearemos una variable temporal a la que le añadiremos a las condiciones de victoria
         // un array con nuestro indice
         const condition = victoryConditions[i];
-        const cellA = voidArray[condition[0]];
-        const cellB = voidArray[condition[1]];
-        const cellC = voidArray[condition[2]];
+        const cellA = board[condition[0]];
+        const cellB = board[condition[1]];
+        const cellC = board[condition[2]];
         /*
         aqui iteramos sobre el interior del array de "victoryConditions"
         creamos una condicion de indice que ira recorriendo una a una las posiciones del "voidArray"
@@ -146,24 +143,25 @@ function checkWinner() {
     }
 
     if (victory) {
-        statusText.textContent = `${currentPlayer} gana!!`;
+        statusText.textContent = `${currentPlayerName} gana!!`;
         running = false;
     }
     // comento la funcion de empate, ya que solo se pueden utilizar 3 fichas por jugador
-    else if (!voidArray.includes("")) {
-        statusText.textContent = `Empate!`;
-        running = false;
-    }
-    else {
+    // else if (!board.includes("")) {
+    //     statusText.textContent = `Empate!`;
+    //     running = false;
+    // }
+    // else {
         // changePlayer();
-    }
+    // }
 }
 //  cree un boton de reinicio que limpia las celdas, restaura los turnos y el nombre del jugador acutal
 function restartGame() {
     currentPlayer = "X";
-    voidArray = ["", "", "", "", "", "", "", "", ""];
-    statusText.textContent = `Es el turno de ${currentPlayer}`;
+    currentPlayerName = player1Name;
+    board = ["", "", "", "", "", "", "", "", ""];
+    statusText.textContent = `Es el turno de "X" ${currentPlayerName}`;
     cells.forEach(cell => cell.textContent = "");
-    flag = 6
+    turn = 6
     running = true;
 }
