@@ -1,5 +1,5 @@
 body {
-  background-image: url(../IMG/gameWallpaper.jpg);
+  background-image: url(../IMG/menuWallpaper.jpg);
   height: 100vh;
   background-size: cover;
 }
@@ -13,52 +13,46 @@ body {
 
 #dataSave {
   background: linear-gradient(rgba(255, 255, 255, 0.5), transparent);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 20vh;
+  text-shadow: 0 0 0.2em rgb(255, 123, 0), 0 0 0.2em rgb(255, 238, 0),
+  0 0 0.2em rgb(255, 238, 0);
 }
 
 /* #symbolO {
-  margin: auto;
-  height: 5.5em;
   border: 0.2em groove rgb(255, 251, 0);
   border-radius: 50%;
   background: radial-gradient(transparent, rgba(0, 255, 255, 0.5));
 } */
 
-#currentPlayer {
+.infoPlayers {
+  display: flex;
+  justify-content: center;
+  margin: 1vh;
+  border: 0.2em groove rgb(255, 251, 0);
   border-bottom-left-radius: 15%;
   border-bottom-right-radius: 15%;
-  border: 0.2em groove rgb(255, 251, 0);
-  background: radial-gradient(transparent, yellow);
+  background: radial-gradient(transparent, rgba(255, 255, 0, 0.5));
 }
 
 /* #symbolX {
-  margin: auto;
-  height: 5.5em;
   border: 0.2em groove rgb(255, 251, 0);
   border-radius: 50%;
   background: radial-gradient(transparent, rgba(255, 0, 0, 0.5));
 } */
 
-#battlefield {
+/* #battlefield {
   display: grid;
-  margin-top: 5vh;
   justify-content: center;
   align-content: center;
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(3, auto);
-}
+} */
 
 .cell {
-  transition: background-color .5s;
-  background-color: transparent;
-  color: black;
-  font-size: 4em;
   width: 20vw;
   height: 20vh;
-  border: 0.1em groove rgb(255, 251, 0);
+  border: 0.2em groove rgb(255, 251, 0);
   border-radius: 5%;
   margin: 0.5vh 0.5vw;
   display: flex;
@@ -66,13 +60,6 @@ body {
   align-items: center;
   position: relative;
   cursor: pointer;
-  text-shadow: 0 0 0.2em yellow, 0 0 0.2em yellow,
-  0 0 0.2em yellow;
-}
-
-.cell:hover {
-  transition: background-color .5s;
-  background-color: rgba(251, 255, 0, 0.336);
 }
 
 .cell:first-child,
@@ -103,22 +90,15 @@ body {
   height: 15vh;
 }
 
-#restartBtn {
-  transform: scale(1);
-  transition: 3s;
-  height: 10vh;
-  border-radius: 50%;
-  background: radial-gradient(transparent, yellow);
-}
-
-#restartBtn:hover {
-  transform: scale(1.5);
-  transition: 1s;
-}
-
-#statusText {
-  color: black;
-  font-size: 1.5em;
+#play {
+  color: white;
+  font-size: 3em;
+  text-decoration: none;
   text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
-  0 0 0.2em rgb(0, 0, 0);
+    0 0 0.2em rgb(0, 0, 0);
+}
+
+#zoom:hover {
+  transform: scale(2);
+  transition: 2s;
 }

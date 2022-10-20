@@ -1,17 +1,6 @@
-let player1Name = sessionStorage.getItem("player1Name")
-let player2Name = sessionStorage.getItem("player2Name")
-
-let ifHuman1 = sessionStorage.getItem("player1Hum")
-let ifHuman2 = sessionStorage.getItem("player2Hum")
-
-const randomizer = (numero, letras = "Arcangel ") => letras + numero;
-
-let random = Math.floor(Math.random() * 999);
-
-let result = randomizer(random);
-
-let CPUName = result;
-
+let player1Name = sessionStorage.getItem("player1Name");
+let player2Name = sessionStorage.getItem("player2Name");
+let ifHuman2 = sessionStorage.getItem("player2Hum");
 class Player {
     //PROPIEDADES
     constructor(name, mark) {
@@ -25,7 +14,7 @@ class Player {
 //Instanciamos a 3 jugadores con 2 variables que seran nombre y marca, y 3 turnos fijos.
 let player1 = new Player(player1Name, "X");
 let player2 = new Player(player2Name, "O");
-let player3CPU = new Player(CPUName, "O");
+// let player3CPU = new Player(CPUName, "O");
 
 
 // trabajaremos con constantes que ya nos obtendran el valor de los divs en html con el id especificado
