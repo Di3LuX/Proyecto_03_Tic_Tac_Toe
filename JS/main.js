@@ -2,155 +2,115 @@ let player1Name = sessionStorage.getItem("player1Name");
 let player2Name = sessionStorage.getItem("player2Name");
 let ifHuman2 = sessionStorage.getItem("player2Hum");
 class Player {
-    //PROPIEDADES
-    constructor(name, mark) {
-        // dentro del constructor instanciaremos las clases
-        this.name = name;
-        this.mark = mark;
-        this.turn = 3;
-        // cualquier propiedad dentro de la clase, viene referenciada con el this.
-    };
+
+  constructor(name, mark) {
+    this.name = name;
+    this.mark = mark;
+    this.turn = 3;
+  };
 };
-//Instanciamos a 3 jugadores con 2 variables que seran nombre y marca, y 3 turnos fijos.
 let player1 = new Player(player1Name, "X");
 let player2 = new Player(player2Name, "O");
 // let player3CPU = new Player(CPUName, "O");
 
 
-// trabajaremos con constantes que ya nos obtendran el valor de los divs en html con el id especificado
 const cells = document.querySelectorAll(".cell");
-const statusText = document.querySelector("#statusText"); // getElelemtbyid es mas optimo by miguelonchis
+const statusText = document.querySelector("#statusText"); // getElelemtbyid es mas optimo
 const restartBtn = document.querySelector("#restartBtn");
 
-// aqui una array con las variaciones de filas/columnas que necesitaremos para conseguir la victoria
 const victoryConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
 ];
-// aqui una array con 9 posiciones vacias, util para llamarla y movernos libremente por las casillas
 let board = ["", "", "", "", "", "", "", "", ""];
-// player comenzara siendo "O" y cambiara cada turno (en caso de humano vs humano)
 let currentPlayer = "X";
 let currentPlayerName = player1Name;
-// el juego comenzara con la variable "running" en falso hasta que inizialicemos el juego
 let running = false;
-// aqui utilizare un contador de turnos de 6, que restara por cada vez que posicionemos ficha
 let turn = 6;
 initializeGame();
 
-function initializeGame() {
-    /* aqui usando el "forEach" decimos que por cada "cell" le añada el metodo "addEventListener" 
-    del click y hacermos un callback a la casilla clickada, cual llamaremos mas tarde*/
-    cells.forEach(cell => cell.addEventListener("click", cellClicked));
-    // añadimos el boton de reinicio de partida desde el principio con un callback a "restartgame"
-    restartBtn.addEventListener("click", restartGame);
-    // con .textContent modificaremos el texto del div con id "statusText" para que nos indique
-    // de quien es el turno
-    statusText.textContent = `Es el turno de "X" ${currentPlayerName}`;
-    // aqui hacemos que cuando el juego inizialice cambie a verdadero
-    running = true;
+function restartGame() {
+  currentPlayer = "X";
+  currentPlayerName = player1Name;
+  board = ["", "", "", "", "", "", "", "", ""];
+  statusText.textContent = `Es el turno de ${currentPlayerName} / "X"`;
+  cells.forEach(cell => cell.textContent = "");
+  turn = 6;
+  running = true;
 };
+
+function initializeGame() {
+  cells.forEach(cell => cell.addEventListener("click", cellClicked));
+  restartBtn.addEventListener("click", restartGame);
+  statusText.textContent = `Es el turno de ${currentPlayerName} / "X"`;
+  running = true;
+};
+
 function cellClicked() {
-    /*
-    aqui creo una constante para asignarle un atributo a cada casilla cuando esta sea clickada
-    ese atributo sera el mismo "cellIndex" es decir, por cada click se asignara un indice en 
-    voidArray, dando a esa casilla vacia, una posicion en dicha array.
-    */
-    const cellIndex = this.getAttribute("cellIndex");
-    if ((turn > 0) && (board[cellIndex] != "" || !running)) {
-        board[index] = currentPlayer;
-        cell.textContent = currentPlayer;
-    };
-    // "si" el array de casillas no es igual a vacio o el juego no esta en marcha, no hagas nada y vuelve 
-    updateCell(this, cellIndex);
-    checkWinner();
-    // "si no" llama a la funcion "updateCell" con el argumento this asi como cellIndex
-    // seguido de la funcion checkWinner
+  const cellIndex = this.getAttribute("cellIndex");
+
+  if ((turn > 0) && (board[cellIndex] != "" || !running)) {
+    board[index] = currentPlayer;
+    cell.textContent = currentPlayer;
+  };
+  updateCell(this, cellIndex);
+  checkWinner();
 };
 function updateCell(cell, index) {
-    // aqui, siempre y cuando los turnos sean mayores que 1, asignare el indice y el simbolo 
-    // a la casilla clicada
-    if (turn > 0) {
-        board[index] = currentPlayer;
-        cell.textContent = currentPlayer;
-        turn--;
-        changePlayer();
+
+  if (turn > 0) {
+    board[index] = currentPlayer;
+    cell.textContent = currentPlayer;
+    turn--;
+    changePlayer();
+  } else {
+    if ((board[index] == currentPlayer) && (running == true)) {
+      board[index] = "";
+      cell.textContent = "";
+      turn++;
     } else {
-        if (board[index] == currentPlayer) {
-            board[index] = "";
-            cell.textContent = "";
-            turn++;
-        } else {
-        };
     };
+  };
 };
 
 function changePlayer() {
+  if (running == true) {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
-    currentPlayerName = (currentPlayerName == `"X" ${player1Name}`) ? `"O" ${player2Name}` : `"X" ${player1Name}`;
+    currentPlayerName = (currentPlayerName == `${player2Name} / "O"`) ? `${player1Name} / "X"` : `${player2Name} / "O"`;
     statusText.textContent = `Es el turno de ${currentPlayerName}`;
+  };
 };
 function checkWinner() {
-    //al hacer la comprobacion, victoria sera false hasta que el bucle for siguiente encuentre una condicion de 
-    //victoria valida
-    let victory = false;
-    // con un el bucle for recorreremos la array multidimensional usando la propiedad .length
-    for (let i = 0; i < victoryConditions.length; i++) {
-        // crearemos una variable temporal a la que le añadiremos a las condiciones de victoria
-        // un array con nuestro indice
-        const condition = victoryConditions[i];
-        const cellA = board[condition[0]];
-        const cellB = board[condition[1]];
-        const cellC = board[condition[2]];
-        /*
-        aqui iteramos sobre el interior del array de "victoryConditions"
-        creamos una condicion de indice que ira recorriendo una a una las posiciones del "voidArray"
-        hasta encontrar semejanza.
-        si indice 0,1,2 no son espacios y son todas iguales, significara que alguien gana
-        en caso contrario, seguira recorriendo el orden del array de "victoryConditions"
-            [0, 1, 2], primera vez
-            [3, 4, 5], segunda vez
-            [6, 7, 8], ...
-            [0, 3, 6], ...
-        y asi con sus posiciones de indice en el array
-        */
-        // si cellA esta vacia o cellB esta vacia o cellC esta vacia, continuara...
-        if (cellA == "" || cellB == "" || cellC == "") {
-            continue;
-        }
-        // en su defecto si A es igual a B y B es igual a C, habra un ganador y victoria sera true!
-        if (cellA == cellB && cellB == cellC) {
-            victory = true;
-            break;
-        }
-    }
 
-    if (victory) {
-        statusText.textContent = `${currentPlayerName} gana!!`;
-        running = false;
-    }
-    // comento la funcion de empate, ya que solo se pueden utilizar 3 fichas por jugador
-    // else if (!board.includes("")) {
-    //     statusText.textContent = `Empate!`;
-    //     running = false;
-    // }
-    // else {
-        // changePlayer();
-    // }
-}
-//  cree un boton de reinicio que limpia las celdas, restaura los turnos y el nombre del jugador acutal
-function restartGame() {
-    currentPlayer = "X";
-    currentPlayerName = player1Name;
-    board = ["", "", "", "", "", "", "", "", ""];
-    statusText.textContent = `Es el turno de "X" ${currentPlayerName}`;
-    cells.forEach(cell => cell.textContent = "");
-    turn = 6
-    running = true;
-}
+  let victory = false;
+
+  for (let i = 0; i < victoryConditions.length; i++) {
+
+    const condition = victoryConditions[i];
+    const cellA = board[condition[0]];
+    const cellB = board[condition[1]];
+    const cellC = board[condition[2]];
+
+    if (cellA == "" || cellB == "" || cellC == "") {
+      continue;
+    };
+    if (cellA == cellB && cellB == cellC) {
+      victory = true;
+      break;
+    };
+  };
+
+  if (victory) {
+    window.location.href ="winner.html"
+    turn--
+    changePlayer();
+    running = false;
+
+  };
+};

@@ -1,5 +1,9 @@
+#link{
+  text-decoration: none;
+  color: navy;
+}
 body {
-  background-image: url(../IMG/gameWallpaper.jpg);
+  background-image: url(../IMG/wallpapper.png);
   height: 100vh;
   background-size: cover;
 }
@@ -12,38 +16,22 @@ body {
 }
 
 #dataSave {
-  background: linear-gradient(rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(cyan, transparent);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* #symbolO {
-  margin: auto;
-  height: 5.5em;
-  border: 0.2em groove rgb(255, 251, 0);
-  border-radius: 50%;
-  background: radial-gradient(transparent, rgba(0, 255, 255, 0.5));
-} */
-
 #currentPlayer {
   border-bottom-left-radius: 15%;
   border-bottom-right-radius: 15%;
-  border: 0.2em groove rgb(255, 251, 0);
+  border: 0.3em groove rgb(255, 251, 0);
   background: radial-gradient(transparent, yellow);
 }
 
-/* #symbolX {
-  margin: auto;
-  height: 5.5em;
-  border: 0.2em groove rgb(255, 251, 0);
-  border-radius: 50%;
-  background: radial-gradient(transparent, rgba(255, 0, 0, 0.5));
-} */
-
 #battlefield {
   display: grid;
-  margin-top: 5vh;
+  margin-top: 20vh;
   justify-content: center;
   align-content: center;
   justify-items: center;
@@ -99,25 +87,28 @@ body {
 }
 
 #buttons {
-  background: linear-gradient(transparent, white);
+  background: linear-gradient(transparent, yellow);
   height: 15vh;
 }
 
 #restartBtn {
-  transform: scale(1);
-  transition: 3s;
+  color: red;
+  margin-top: 5vh;
   height: 10vh;
-  border-radius: 50%;
+  border: 0.2em groove yellow;
+  border-radius: 5em;
+  background: radial-gradient(transparent, yellow);
+}
+#mainMenuBtn{
+  text-decoration: none;
+  height: 10vh;
+  border: 0.2em groove yellow;
+  border-radius: 5em;
   background: radial-gradient(transparent, yellow);
 }
 
-#restartBtn:hover {
-  transform: scale(1.5);
-  transition: 1s;
-}
-
 #statusText {
-  color: black;
+  color: white;
   font-size: 1.5em;
   text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
   0 0 0.2em rgb(0, 0, 0);

@@ -1,104 +1,73 @@
 body {
   background-image: url(../IMG/menuWallpaper.jpg);
+  background-size: auto;
   height: 100vh;
-  background-size: cover;
 }
 
 .container-fluid {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-align: center;
   font-size: large;
-  height: 90vh;
 }
 
-#dataSave {
-  background: linear-gradient(rgba(255, 255, 255, 0.5), transparent);
-  height: 20vh;
-  text-shadow: 0 0 0.2em rgb(255, 123, 0), 0 0 0.2em rgb(255, 238, 0),
-  0 0 0.2em rgb(255, 238, 0);
+#currentPlayer {
+  background: linear-gradient(cyan, transparent);
 }
 
-/* #symbolO {
-  border: 0.2em groove rgb(255, 251, 0);
+#playerWelcome {
+  color: black;
+  font-size: 3em;
+  text-decoration: none;
+  text-shadow: 0 0 0.2em yellow, 0 0 0.2em yellow,
+    0 0 0.2em yellow;
+}
+.checkButtons{
+ height: 3vh;
+ width: 3vh;
+}
+
+.switchHu {
+  margin-top: 2vh;
+  background-color: rgba(0, 0, 128, 0.5);
+  border: 0.2em groove yellow;
+  border-radius: 10%;
+  color: white;
+  font-size: 2em;
+  text-decoration: none;
+  text-shadow: 0 0 0.2em cyan, 0 0 0.2em cyan,
+    0 0 0.2em yellow;
+}
+
+.switchAI {
+  background-color: rgba(139, 0, 0, 0.5);
+  border: 0.2em groove yellow;
+  border-radius: 10%;
+  color: black;
+  font-size: 2em;
+  text-decoration: none;
+  text-shadow: 0 0 0.2em red, 0 0 0.2em red,
+  0 0 0.2em red;
+}
+
+#botName {
+  background: radial-gradient(red, transparent);
+  color: black;
   border-radius: 50%;
-  background: radial-gradient(transparent, rgba(0, 255, 255, 0.5));
-} */
-
-.infoPlayers {
-  display: flex;
-  justify-content: center;
-  margin: 1vh;
-  border: 0.2em groove rgb(255, 251, 0);
-  border-bottom-left-radius: 15%;
-  border-bottom-right-radius: 15%;
-  background: radial-gradient(transparent, rgba(255, 255, 0, 0.5));
-}
-
-/* #symbolX {
-  border: 0.2em groove rgb(255, 251, 0);
-  border-radius: 50%;
-  background: radial-gradient(transparent, rgba(255, 0, 0, 0.5));
-} */
-
-/* #battlefield {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: repeat(3, auto);
-} */
-
-.cell {
-  width: 20vw;
-  height: 20vh;
-  border: 0.2em groove rgb(255, 251, 0);
-  border-radius: 5%;
-  margin: 0.5vh 0.5vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.cell:first-child,
-.cell:nth-child(2),
-.cell:nth-child(3) {
-  border-top: none;
-}
-
-/* aqui selecciono que todos los childs de 3"n" + la primera col borre border left  */
-.cell:nth-child(3n + 1) {
-  border-left: none;
-}
-
-/* aqui selecciono que todos los childs de 3"n" + la tercera col borre border left  */
-.cell:nth-child(3n + 3) {
-  border-right: none;
-}
-
-/* aqui con el ultimo child mas la 7 y 8, borro border bot */
-.cell:last-child,
-.cell:nth-child(7),
-.cell:nth-child(8) {
-  border-bottom: none;
-}
-
-#buttons {
-  background: linear-gradient(transparent, white);
-  height: 15vh;
+  border: 0.2em groove darkred;
 }
 
 #play {
-  color: white;
+  cursor: pointer;
+  color: cyan;
   font-size: 3em;
   text-decoration: none;
   text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
     0 0 0.2em rgb(0, 0, 0);
 }
 
-#zoom:hover {
-  transform: scale(2);
-  transition: 2s;
+#buttons {
+  height: 15vh;
+  text-align: center;
+  background: linear-gradient(transparent, yellow);
+  height: 15vh;
 }
