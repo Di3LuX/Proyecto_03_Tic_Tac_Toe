@@ -115,7 +115,7 @@ function checkWinner() {
 
     running = false;
 
-    window.location.href = "winner.html";
+    window.location.href = "./winner.html";
 
   };
 };

@@ -31,6 +31,7 @@ body {
   border-top: 5px groove yellow;
   border-bottom: 5px groove yellow;
 }
+
 #play {
   cursor: pointer;
   color: cyan;

@@ -4,3 +4,18 @@ body {
   background-size: cover;
 }
 
+#winnerText {
+  text-align: center;
+  color: cyan;
+  font-size: 3em;
+  text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
+    0 0 0.2em rgb(0, 0, 0);
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 3em;
+  text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
+    0 0 0.2em rgb(0, 0, 0);
+}

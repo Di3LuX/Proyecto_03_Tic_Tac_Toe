@@ -29,7 +29,7 @@ function saveGameData() {
   let ifAI = document.getElementById("checkAI").value;
  
   if (name2 == "") {
-    alert('No escribiste ningun nombre para el jugador 2...');
+    alert('No escribiste ningun nombre para el jugador 2 humano...');
   } else {
   sessionStorage.setItem("player2Name", name2);
   sessionStorage.setItem("player2Hum", ifHuman);
