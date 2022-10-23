@@ -22,12 +22,6 @@ function saludar() {
   botName.textContent = `${result}`;
 };
 
-winner();
-
-function winner() {
-  playerWinner.textContent = `${currentPlayer}!`;
-  botName.textContent = `${result}`;
-};
 function saveGameData() {
 
   let name2 = document.getElementById("player2Name").value;

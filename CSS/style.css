@@ -23,10 +23,10 @@ body {
 }
 
 #currentPlayer {
-  border-bottom-left-radius: 15%;
-  border-bottom-right-radius: 15%;
+  border-bottom-left-radius: 15em;
+  border-bottom-right-radius: 15em;
   border: 0.3em groove rgb(255, 251, 0);
-  background: radial-gradient(transparent, yellow);
+  background: radial-gradient(transparent, navy);
 }
 
 #battlefield {

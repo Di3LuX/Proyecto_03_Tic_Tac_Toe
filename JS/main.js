@@ -107,10 +107,15 @@ function checkWinner() {
   };
 
   if (victory) {
-    window.location.href ="winner.html"
-    turn--
-    changePlayer();
+
+    changePlayer()
+    let winner = currentPlayer == "X" ? player1Name : player2Name;
+
+    sessionStorage.setItem("currentWinner", winner);
+
     running = false;
+
+    window.location.href = "winner.html";
 
   };
 };
