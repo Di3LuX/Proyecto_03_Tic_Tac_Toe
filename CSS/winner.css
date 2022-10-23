@@ -19,3 +19,28 @@ h1 {
   text-shadow: 0 0 0.2em rgb(229, 255, 0), 0 0 0.2em rgb(255, 238, 0),
     0 0 0.2em rgb(0, 0, 0);
 }
+
+#restartBtn {
+  height: 10vh;
+  border: 0.2em groove yellow;
+  border-radius: 5em;
+  background: radial-gradient(transparent, yellow);
+}
+#mainMenuBtn{
+  text-decoration: none;
+  height: 10vh;
+  border: 0.2em groove yellow;
+  border-radius: 5em;
+  background: radial-gradient(transparent, yellow);
+}
+#link{
+  text-decoration: none;
+  color: black;
+}
+
+#buttons{
+  margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
